@@ -15,8 +15,8 @@ public class PlayScreen implements Screen {
     private int screenHeight;
 
     public PlayScreen(){
-        screenWidth = 80;
-        screenHeight = 21;
+        screenWidth = Integer.parseInt(utils.ConfigReader.getInstance().getValue("screen.width"));
+        screenHeight = Integer.parseInt(utils.ConfigReader.getInstance().getValue("screen.height"));;
         createWorld();
     }
 
