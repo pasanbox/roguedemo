@@ -54,9 +54,7 @@ public class PlayScreen implements Screen {
     }
 
     private void createWorld(){
-        world = new WorldBuilder(90, 31)
-                .makeCaves()
-                .build();
+        world = new WorldBuilder(90, 31).createRandomWorld();
     }
 
     public int getScrollX() {

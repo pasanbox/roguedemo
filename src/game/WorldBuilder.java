@@ -1,5 +1,7 @@
 package game;
 
+import utils.ConfigReader;
+
 public class WorldBuilder {
     private int width;
     private int height;
@@ -11,20 +13,21 @@ public class WorldBuilder {
         this.tiles = new Tile[width][height];
     }
 
-    public World build() {
+    public World createRandomWorld() {
+        randomizeTiles();
+        smooth(Integer.parseInt(ConfigReader.getInstance().getValue("world.smoothness")));
         return new World(tiles);
     }
 
-    private WorldBuilder randomizeTiles() {
+    private void randomizeTiles() {
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 tiles[x][y] = Math.random() < 0.5 ? Tile.FLOOR : Tile.WALL;
             }
         }
-        return this;
     }
 
-    private WorldBuilder smooth(int times) {
+    private void smooth(int times) {
         Tile[][] tiles2 = new Tile[width][height];
         for (int time = 0; time < times; time++) {
 
@@ -50,10 +53,6 @@ public class WorldBuilder {
             }
             tiles = tiles2;
         }
-        return this;
     }
 
-    public WorldBuilder makeCaves() {
-        return randomizeTiles().smooth(8);
-    }
 }
